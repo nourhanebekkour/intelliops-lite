@@ -30,7 +30,7 @@ def classifier(evt: Evenement, nb_erreurs: int = 0) -> str:
     Classe la criticité de l'événement selon sa sévérité et le nombre d'erreurs.
     """
     # Exemple de règles simples
-    if nb_erreurs >= 3:
+    if nb_erreurs > 100:
         return "CRITICAL"
     if evt.severity.upper() == "HIGH":
         return "HIGH"
