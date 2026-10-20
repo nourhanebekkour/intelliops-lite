@@ -2,7 +2,7 @@
 import sys
 from datetime import datetime, timezone
 
-from src.notification import tracer_decision, valider_action
+from src.notification import CANAUX, tracer_decision, valider_action
 from src.workflow import traiter_log, traiter_pipeline, traiter_scan
 
 
@@ -41,7 +41,11 @@ def afficher(resultat, audit):
     print(notif.text)
 
     if ana.sensitive:
-        reponse = input("Action sensible. Approuver ? (o/n) : ")
+        try:
+            reponse = input("Action sensible. Approuver ? (o/n) : ")
+        except EOFError:
+            reponse = ""
+            print("Aucune reponse recue : action refusee par defaut.")
         ok = valider_action(ana, reponse)
 
         maintenant = datetime.now(timezone.utc).strftime(
@@ -61,6 +65,7 @@ def afficher(resultat, audit):
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
+    CANAUX.setdefault("INFO", "DASHBOARD")
 
     vus, compteur, historique, audit = set(), {}, [], []
 
