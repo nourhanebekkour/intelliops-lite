@@ -38,4 +38,4 @@ class TestAnalyse(unittest.TestCase):
         base = PROCEDURES
         analyse = analyser(e, base, nb_erreurs=3)
         self.assertIsInstance(analyse, Analyse)
-        self.assertEqual(analyse.diagnostic, "CRITICAL")
+        self.assertEqual(analyse.level, "CRITICAL")
