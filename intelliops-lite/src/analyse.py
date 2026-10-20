@@ -9,7 +9,7 @@ def est_doublon(evt: Evenement, vus: set) -> bool:
     vus.add(evt.id)
     return False
 def compter_erreurs(evt: Evenement, compteur: dict) -> int:
-   """
+    """
     Compte le nombre d'erreurs par composant.
     """
     key = evt.component
