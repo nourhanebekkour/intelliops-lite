@@ -16,8 +16,15 @@ def compter_erreurs(evt: Evenement, compteur: dict) -> int:
     compteur[key] = compteur.get(key, 0) + 1
     return compteur[key]
 def chercher_procedures(evt: Evenement, base: dict) -> list:
-raise NotImplementedError
-
+    """
+    Retourne la liste des procédures associées à un événement
+    en fonction de son type ou message.
+    """
+    procedures = []
+    for rule, actions in base.items():
+        if rule in evt.message or rule in evt.event_type:
+            procedures.extend(actions)
+    return procedures
 def classifier(evt: Evenement, nb_erreurs: int = 0) -> str:
 raise NotImplementedError
 
