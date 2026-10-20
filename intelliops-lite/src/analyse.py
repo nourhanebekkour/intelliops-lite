@@ -38,4 +38,20 @@ def classifier(evt: Evenement, nb_erreurs: int = 0) -> str:
         return "LOW"
     return "INFO"
 def analyser(evt: Evenement, base: dict, nb_erreurs: int = 0) -> Analyse:
-raise NotImplementedError
+    """
+    Produit une analyse complète de l'événement.
+    """
+    level = classifier(evt, nb_erreurs)
+    procedures = chercher_procedures(evt, base)
+    explanation = f"Event {evt.id} classified as {level}"
+    action = procedures[0] if procedures else "No action defined"
+    sensitive = "password" in evt.message.lower() or "token" in evt.message.lower()
+
+    return Analyse(
+        event_id=evt.id,
+        level=level,
+        explanation=explanation,
+        action=action,
+        sensitive=sensitive,
+        sources=[evt.source]
+    )
