@@ -26,7 +26,16 @@ def chercher_procedures(evt: Evenement, base: dict) -> list:
             procedures.extend(actions)
     return procedures
 def classifier(evt: Evenement, nb_erreurs: int = 0) -> str:
-raise NotImplementedError
-
+    """
+    Classe la criticité de l'événement selon sa sévérité et le nombre d'erreurs.
+    """
+    # Exemple de règles simples
+    if nb_erreurs >= 3:
+        return "CRITICAL"
+    if evt.severity.upper() == "HIGH":
+        return "HIGH"
+    if evt.severity.upper() == "LOW":
+        return "LOW"
+    return "INFO"
 def analyser(evt: Evenement, base: dict, nb_erreurs: int = 0) -> Analyse:
 raise NotImplementedError
