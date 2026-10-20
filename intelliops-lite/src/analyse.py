@@ -9,8 +9,12 @@ def est_doublon(evt: Evenement, vus: set) -> bool:
     vus.add(evt.id)
     return False
 def compter_erreurs(evt: Evenement, compteur: dict) -> int:
-raise NotImplementedError
-
+   """
+    Compte le nombre d'erreurs par composant.
+    """
+    key = evt.component
+    compteur[key] = compteur.get(key, 0) + 1
+    return compteur[key]
 def chercher_procedures(evt: Evenement, base: dict) -> list:
 raise NotImplementedError
 
